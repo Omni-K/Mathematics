@@ -59,6 +59,20 @@ package algebra
 			return Math.sqrt(this.i * this.i + this.r * this.r);
 		}
 		
+		public function sqrt():ComplexNumber
+		{
+			if (this.i == 0)
+			{
+				var err:Error = new Error("This function works only with complex numbers. If imaginary part = 0 use Math.sqrt instead.", 0);
+				err.getStackTrace();
+			}
+			var result_r:Number = Math.sqrt((this.r + this.abs()) / 2);
+			
+			var result_i:Number = this.i / Math.abs(this.i) * (Math.sqrt((this.abs() - this.r) / 2));
+			
+			return new ComplexNumber(result_r, result_i);
+		}
+		
 		public override function toString():String
 		{
 			if (this.r == 0 && this.i == 0)
